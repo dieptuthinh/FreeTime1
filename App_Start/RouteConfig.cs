@@ -16,7 +16,7 @@ namespace FreeTime1
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "DonHangNhaps", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Longin", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

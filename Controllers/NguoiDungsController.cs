@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Security.Cryptography;
 using System.Web.Mvc;
 using FreeTime1.Models;
 
@@ -46,10 +45,17 @@ namespace FreeTime1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaND,TaiKhoan,MatKhau,ChucVu,HoTen,SDT,Anh,DiaChi,GioiTinh")] NguoiDung nguoiDung)
+        public ActionResult Create([Bind(Include = "TaiKhoan,MatKhau,NhapLaiMatKhau,ChucVu,HoTen,SDT,Anh,DiaChi,GioiTinh")] NguoiDung nguoiDung)
         {
             if (ModelState.IsValid)
             {
+                nguoiDung.MatKhau = SecurePasswordHasher.Hash(nguoiDung.MatKhau);
+                nguoiDung.NhapLaiMatKhau = nguoiDung.MatKhau;
+                nguoiDung.Anh = "anh";
+                int count = db.NguoiDungs.Count() + 1;
+                if (nguoiDung.ChucVu == "Quản lý") nguoiDung.MaND = "QL" + count.ToString();
+                else if (nguoiDung.ChucVu == "Nhân viên") nguoiDung.MaND = "NV" + count.ToString();
+                else return View(nguoiDung);
                 db.NguoiDungs.Add(nguoiDung);
                 db.SaveChanges();
                 return RedirectToAction("Index");

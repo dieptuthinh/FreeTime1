@@ -1,7 +1,7 @@
-﻿<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
--->
+﻿@{
+    ViewBag.Title = "Đăng nhập";
+    Layout = null;
+}
 
 <!DOCTYPE html>
 <html lang="zxx">
@@ -23,13 +23,13 @@ Author URL: http://w3layouts.com
             <div class="wrapper">
                 <div class="form-inner-cont">
                     <h3>Login now</h3>
-                    <form action="#" method="post" class="signin-form">
+                    <form action="/Login/Login" method="post" class="signin-form">
                         <div class="form-input">
-                            <span class="fa fa-envelope-o" aria-hidden="true"></span> <input type="email" name="email"
-                                                                                             placeholder="Username" required />
+                            <span class="fa fa-envelope-o" aria-hidden="true"></span> <input type="text" name="TaiKhoan"
+                                                                                             placeholder="Tài khoản" required />
                         </div>
                         <div class="form-input">
-                            <span class="fa fa-key" aria-hidden="true"></span> <input type="password" name="password" placeholder="Password"
+                            <span class="fa fa-key" aria-hidden="true"></span> <input type="password" name="MatKhau" placeholder="Mật khẩu"
                                                                                       required />
                         </div>
                         <div class="login-remember d-grid">
@@ -38,7 +38,7 @@ Author URL: http://w3layouts.com
                                 <span class="checkmark"></span>
                                 <p class="remember">Remember me</p>
                             </label>
-                            <button class="btn theme-button"> @Html.ActionLink("Login", "Index", "Home")</button>
+                            <button class="btn theme-button">Đăng nhập</button>
                         </div>
                         <div class="new-signup">
                             <a href="#reload" class="signuplink">Forgot password?</a>
