@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
+using System.Security.Cryptography;
 using System.Web.Mvc;
 using FreeTime1.Models;
 
@@ -46,12 +44,30 @@ namespace FreeTime1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MaND,TaiKhoan,MatKhau,ChucVu,HoTen,SDT,Anh,DiaChi,GioiTinh")] NguoiDung nguoiDung)
+        public ActionResult Create([Bind(Include = "TaiKhoan,MatKhau,NhapLaiMatKhau,ChucVu,HoTen,SDT,Anh,DiaChi,GioiTinh")] NguoiDung nguoiDung)
         {
             if (ModelState.IsValid)
             {
+                System.Diagnostics.Debug.WriteLine(nguoiDung.MatKhau);
+                nguoiDung.MatKhau = SecurePasswordHasher.Hash(nguoiDung.MatKhau);
+                nguoiDung.MaND = "11111";
+                int count = db.NguoiDungs.Count();
+                System.Diagnostics.Debug.WriteLine(count);
                 db.NguoiDungs.Add(nguoiDung);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
+                {
+                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                    {
+                        foreach (var validationError in entityValidationErrors.ValidationErrors)
+                        {
+                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                        }
+                    }
+                }
                 return RedirectToAction("Index");
             }
 
