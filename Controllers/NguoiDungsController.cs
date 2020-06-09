@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
@@ -48,26 +49,15 @@ namespace FreeTime1.Controllers
         {
             if (ModelState.IsValid)
             {
-                System.Diagnostics.Debug.WriteLine(nguoiDung.MatKhau);
                 nguoiDung.MatKhau = SecurePasswordHasher.Hash(nguoiDung.MatKhau);
-                nguoiDung.MaND = "11111";
-                int count = db.NguoiDungs.Count();
-                System.Diagnostics.Debug.WriteLine(count);
+                nguoiDung.NhapLaiMatKhau = nguoiDung.MatKhau;
+                nguoiDung.Anh = "anh";
+                int count = db.NguoiDungs.Count() + 1;
+                if (nguoiDung.ChucVu == "Quản lý") nguoiDung.MaND = "QL" + count.ToString();
+                else if (nguoiDung.ChucVu == "Nhân viên") nguoiDung.MaND = "NV" + count.ToString();
+                else return View(nguoiDung);
                 db.NguoiDungs.Add(nguoiDung);
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (System.Data.Entity.Validation.DbEntityValidationException ex)
-                {
-                    foreach (var entityValidationErrors in ex.EntityValidationErrors)
-                    {
-                        foreach (var validationError in entityValidationErrors.ValidationErrors)
-                        {
-                            Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
-                        }
-                    }
-                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 

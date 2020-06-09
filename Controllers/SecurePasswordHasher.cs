@@ -12,6 +12,11 @@ namespace FreeTime1.Controllers
         /// </summary>
         private const int HashSize = 20;
 
+        internal static bool Verify(string matKhau)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Creates a hash from a password.
         /// </summary>

@@ -12,6 +12,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.MaND)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.TaiKhoan)
         </th>
         <th>
@@ -36,37 +39,37 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaiKhoan)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MatKhau)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ChucVu)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HoTen)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SDT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Anh)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiaChi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GioiTinh)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaND }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaND }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaND })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.MaND)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TaiKhoan)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ChucVu)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.HoTen)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SDT)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Anh)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DiaChi)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GioiTinh)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.MaND }) |
+        @Html.ActionLink("Details", "Details", new { id = item.MaND }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.MaND })
+    </td>
+</tr>
 }
 
 </table>

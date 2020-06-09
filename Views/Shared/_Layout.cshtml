@@ -17,10 +17,11 @@
 
 
     <title>@ViewBag.Title</title>
+    @RenderSection("styles", false)
 </head>
 <body>
     <div id="header-nav">
-        <nav class="navbar navbar-expand-sm navbar-inverse  d-flex justify-content-between nav-layout" margin="none">
+        <nav class="navbar navbar-expand-sm navbar-inverse  d-flex justify-content-between nav-layout" margin="none" style="border-radius: unset;">
             <div class="container-fluid">
                 <div class="nav-item">
                     <a href="#" class="navbar-brand"><img src="~/imgs/logo.jpg" width="30" height="30" alt="logo"></a>
